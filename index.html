@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Справочник курьера 21vek.by</title>
+    <title>Памятка курьера | 21vek.by</title>
     <style>
         :root {
             --primary: #e51965;
@@ -50,12 +50,14 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 800;
-            letter-spacing: -0.5px;
         }
 
         .version {
@@ -67,6 +69,8 @@
 
         .search-box {
             position: relative;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         #searchInput {
@@ -101,7 +105,6 @@
             margin: 0 auto;
         }
 
-        /* Grid Menu */
         .grid-menu {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -121,12 +124,16 @@
             justify-content: space-between;
             min-height: 82px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-            transition: transform 0.1s;
+            transition: transform 0.1s, background 0.1s;
+        }
+
+        .tile:hover {
+            background: #f8f9fa;
+            border-color: var(--primary);
         }
 
         .tile:active {
             transform: scale(0.97);
-            background: #f9f9f9;
         }
 
         .tile-icon {
@@ -135,12 +142,12 @@
         }
 
         .tile-title {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.25;
+            color: var(--text);
         }
 
-        /* Back button */
         .back-btn {
             display: none;
             width: 100%;
@@ -156,7 +163,10 @@
             text-align: center;
         }
 
-        /* Cards */
+        .back-btn:hover {
+            background: #d0d7de;
+        }
+
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -198,7 +208,6 @@
             margin-bottom: 8px;
         }
 
-        /* Badges & Alerts */
         .alert {
             padding: 10px 12px;
             border-radius: 8px;
@@ -237,7 +246,6 @@
             margin: 8px 0;
         }
 
-        /* Call buttons */
         .call-btn {
             display: flex;
             justify-content: space-between;
@@ -285,57 +293,53 @@
 
 <header>
     <div class="header-top">
-        <div class="logo">21vek.by | Памятка</div>
+        <div class="logo">21vek.by | Справочник</div>
         <div class="version">Ред. 7.9</div>
     </div>
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Поиск: халва, недозвон, скидка, ГТ, PAX..." oninput="filterCards()">
-        <button class="clear-btn" id="clearBtn" onclick="clearSearch()">✕</button>
+        <input type="text" id="searchInput" placeholder="Поиск: халва, паспорт, недозвон, АЗС, ГТ..." oninput="filterCards()">
+        <button type="button" class="clear-btn" id="clearBtn" onclick="clearSearch()">✕</button>
     </div>
 </header>
 
 <div class="container">
-    <button class="back-btn" id="backBtn" onclick="resetCategory()">← Вернуться в главное меню</button>
+    <button type="button" class="back-btn" id="backBtn" onclick="resetCategory()">← Вернуться в главное меню</button>
 
-    <!-- Главное меню из 6 основных разделов -->
     <div class="grid-menu" id="gridMenu">
-        <div class="tile" onclick="selectCategory('delivery')">
+        <button type="button" class="tile" onclick="selectCategory('morning')">
+            <div class="tile-icon">📦</div>
+            <div class="tile-title">Утро: Склад и Загрузка</div>
+        </button>
+        <button type="button" class="tile" onclick="selectCategory('delivery')">
             <div class="tile-icon">🚚</div>
             <div class="tile-title">Звонки, ВВВ и Недозвон</div>
-        </div>
-        <div class="tile" onclick="selectCategory('payment')">
+        </button>
+        <button type="button" class="tile" onclick="selectCategory('payment')">
             <div class="tile-icon">💳</div>
-            <div class="tile-title">Оплата, PAX и Рассрочки</div>
-        </div>
-        <div class="tile" onclick="selectCategory('warranty')">
+            <div class="tile-title">Оплата, PAX и Сертификаты</div>
+        </button>
+        <button type="button" class="tile" onclick="selectCategory('warranty')">
             <div class="tile-icon">📄</div>
             <div class="tile-title">Гарантийные талоны (ГТ)</div>
-        </div>
-        <div class="tile" onclick="selectCategory('defect')">
+        </button>
+        <button type="button" class="tile" onclick="selectCategory('defect')">
             <div class="tile-icon">🛠</div>
             <div class="tile-title">Брак, Скидки и Возврат</div>
-        </div>
-        <div class="tile" onclick="selectCategory('cancel')">
+        </button>
+        <button type="button" class="tile" onclick="selectCategory('credit')">
+            <div class="tile-icon">🪪</div>
+            <div class="tile-title">Кредит, Рассрочка и Паспорт</div>
+        </button>
+        <button type="button" class="tile" onclick="selectCategory('b2b')">
+            <div class="tile-icon">🏢</div>
+            <div class="tile-title">Юрлица, Мото и Ювелирка</div>
+        </button>
+        <button type="button" class="tile" onclick="selectCategory('cancel')">
             <div class="tile-icon">❌</div>
             <div class="tile-title">Причины отмены в МПК</div>
-        </div>
-        <div class="tile" onclick="selectCategory('contacts')">
-            <div class="tile-icon">📞</div>
-            <div class="tile-title">Быстрые звонки (Номера)</div>
-        </div>
-    </div>
-
-    <div class="no-results" id="noResults">
-        Ничего не найдено. Попробуйте ввести другое слово (например: <b>чек, паспорт, отказ, стикер</b>) или свяжитесь с координатором.
-    </div>
-
-    <!-- КАРТОЧКИ ИНСТРУКЦИИ -->
-    <div id="cardsContainer" style="display: none;">
-
-        <!-- РАЗДЕЛ: ЗВОНКИ И ДОСТАВКА -->
-        <div class="card" data-cat="delivery" data-tags="звонок выезд время раньше интервал ввв опоздание">
-            <div class="card-category">Звонки и ВВВ</div>
-            <div class="card-title">Звонок перед выездом и доставка раньше срока</div>
-            <ul>
-                <li><b>Когда звонить:</b> за 15 мин (Минск), за 30 мин (Минский р-н и регионы). Только с <b>рабочего телефона</b>!</li>
-                <li><b>Доставка раньше интервала:</b> разрешена только для <b>первых 3-х заказов</b> по списку в МПК и только с согласия клиента.</li>
+        </button>
+        <button type="button" class="tile" onclick="selectCategory('auto')">
+            <div class="tile-icon">⛽</div>
+            <div class="tile-title">Авто, Заправка АЗС и ДТП</div>
+        </button>
+        <button type="button" class="tile" onclick="selectCategory('contacts')">
