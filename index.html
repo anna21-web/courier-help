@@ -8,34 +8,33 @@
 :root{--p:#e51965;--s:#5c2d91;--bg:#f4f5f7;--c:#fff;--t:#1f2328;--m:#656d76;--b:#d0d7de}
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
 body{background:var(--bg);color:var(--t);padding-bottom:40px}
-header{background:linear-gradient(135deg,var(--s),var(--p));color:#fff;padding:16px;position:sticky;top:0;z-index:100}
+header{background:linear-gradient(135deg,var(--s),var(--p));color:#fff;padding:16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .ht{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;max-width:600px;margin-inline:auto}
 .logo{font-size:19px;font-weight:800}
 .ver{font-size:12px;background:rgba(255,255,255,.2);padding:3px 8px;border-radius:12px}
 .sb{position:relative;max-width:600px;margin:0 auto}
-#q{width:100%;padding:12px 40px 12px 14px;border:none;border-radius:10px;font-size:16px;outline:none}
-#cb{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:#ddd;border:none;border-radius:50%;width:24px;height:24px;display:none;cursor:pointer}
+#q{width:100%;padding:12px 14px;border:none;border-radius:10px;font-size:16px;outline:none}
 .cnt{padding:12px;max-width:600px;margin:0 auto}
-.gm{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
-.tl{background:var(--c);border:1px solid var(--b);border-radius:12px;padding:14px 12px;text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;min-height:82px}
-.tl:active{background:#eee}
-.ti{font-size:22px;margin-bottom:6px}
-.tt{font-size:13.5px;font-weight:700;line-height:1.25;color:var(--t)}
-#bb{display:none;width:100%;padding:12px;background:#e1e4e8;border:none;border-radius:10px;font-size:15px;font-weight:600;margin-bottom:12px;cursor:pointer}
-.cd{background:var(--c);border:1px solid var(--b);border-radius:12px;padding:16px;margin-bottom:12px}
-.cc{font-size:11px;text-transform:uppercase;font-weight:700;color:var(--p);margin-bottom:4px}
-.ct{font-size:17px;font-weight:700;margin-bottom:10px}
-.cd ul,.cd ol{padding-left:20px;margin-bottom:10px}
-.cd li,.cd p{font-size:14.5px;line-height:1.45;margin-bottom:8px}
+details.sec{background:var(--c);border:1px solid var(--b);border-radius:12px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+summary.sec-btn{list-style:none;padding:15px 14px;font-size:15.5px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+summary.sec-btn::-webkit-details-marker{display:none}
+summary.sec-btn::after{content:"▼";font-size:12px;color:var(--p);transition:transform .2s}
+details[open] summary.sec-btn{background:#fdf2f6;border-bottom:1px solid var(--b)}
+details[open] summary.sec-btn::after{transform:rotate(180deg)}
+.sec-body{padding:12px}
+.cd{background:#fafbfc;border:1px solid #e1e4e8;border-radius:10px;padding:14px;margin-bottom:10px}
+.cd:last-child{margin-bottom:0}
+.ct{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--s)}
+.cd ul,.cd ol{padding-left:20px;margin-bottom:8px}
+.cd li,.cd p{font-size:14.5px;line-height:1.45;margin-bottom:6px}
 .al{padding:10px 12px;border-radius:8px;font-size:13.5px;line-height:1.4;margin:8px 0;font-weight:500}
 .ad{background:#ffebe9;color:#cf222e;border-left:4px solid #cf222e}
 .aw{background:#fff8c5;color:#9a6700;border-left:4px solid #d4a72c}
 .ao{background:#dafbe1;color:#1a7f37;border-left:4px solid #1a7f37}
 .sc{background:#f0f4f8;border-left:4px solid var(--s);padding:10px 12px;border-radius:6px;font-style:italic;font-size:14px;margin:8px 0}
-.ph{display:flex;justify-content:space-between;align-items:center;background:#f6f8fa;border:1px solid var(--b);padding:12px;border-radius:8px;text-decoration:none;color:var(--t);margin-bottom:8px;font-weight:600;font-size:14px}
+.ph{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--b);padding:12px;border-radius:8px;text-decoration:none;color:var(--t);margin-bottom:8px;font-weight:600;font-size:14px}
 .ph span:last-child{color:var(--p);font-weight:700}
-#nr{text-align:center;padding:30px 15px;color:var(--m);display:none}
-table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0;background:#fff}
 td,th{border:1px solid var(--b);padding:6px 8px;text-align:left}
 th{background:#f6f8fa}
 </style>
@@ -43,66 +42,56 @@ th{background:#f6f8fa}
 <body>
 <header>
 <div class="ht"><div class="logo">21vek.by | Справочник</div><div class="ver">Ред. 7.9</div></div>
-<div class="sb"><input type="text" id="q" placeholder="Поиск: халва, паспорт, недозвон, АЗС, ГТ..."><button type="button" id="cb">✕</button></div>
+<div class="sb"><input type="text" id="q" placeholder="Быстрый поиск по тексту (халва, паспорт, АЗС, ГТ...)" onkeyup="srch()"></div>
 </header>
-<div class="cnt">
-<button type="button" id="bb">← Вернуться в главное меню</button>
-<div class="gm" id="gm">
-<button type="button" class="tl" data-go="morning"><div class="ti">📦</div><div class="tt">Утро: Склад и Загрузка</div></button>
-<button type="button" class="tl" data-go="delivery"><div class="ti">🚚</div><div class="tt">Звонки, ВВВ и Недозвон</div></button>
-<button type="button" class="tl" data-go="payment"><div class="ti">💳</div><div class="tt">Оплата, PAX и Сертификаты</div></button>
-<button type="button" class="tl" data-go="warranty"><div class="ti">📄</div><div class="tt">Гарантийные талоны (ГТ)</div></button>
-<button type="button" class="tl" data-go="defect"><div class="ti">🛠</div><div class="tt">Брак, Скидки и Возврат</div></button>
-<button type="button" class="tl" data-go="credit"><div class="ti">🪪</div><div class="tt">Кредит, Рассрочка и Паспорт</div></button>
-<button type="button" class="tl" data-go="b2b"><div class="ti">🏢</div><div class="tt">Юрлица, Мото и Ювелирка</div></button>
-<button type="button" class="tl" data-go="cancel"><div class="ti">❌</div><div class="tt">Причины отмены в МПК</div></button>
-<button type="button" class="tl" data-go="auto"><div class="ti">⛽</div><div class="tt">Авто, Заправка АЗС и ДТП</div></button>
-<button type="button" class="tl" data-go="contacts"><div class="ti">📞</div><div class="tt">Дежурные номера служб</div></button>
-</div>
-<div id="nr">Ничего не найдено. Попробуйте другое слово или свяжитесь с координатором.</div>
-<div id="cc" style="display:none">
+<div class="cnt" id="list">
 
-<div class="cd" data-cat="morning" data-tags="утро лекарь алкотестер bts приемка авто паспорт выезд">
-<div class="cc">Утро и Склад</div><div class="ct">Выезд на линию и приемка авто</div>
+<details class="sec" data-tags="утро лекарь алкотестер bts приемка авто паспорт выезд маркер стикер зеленый синий желтый красный qr">
+<summary class="sec-btn">📦 1. Утро: Склад, Маркеры и Загрузка</summary>
+<div class="sec-body">
+<div class="cd">
+<div class="ct">Выезд на линию и приемка авто</div>
 <ul>
 <li><b>Паспорт и права:</b> запрещено выезжать без действующего паспорта, ВУ и автовизитки с рабочим номером.</li>
-<li><b>МИС «Лекарь»:</b> снимите головной убор, в кадре 1 человек. Дуйте сильно 3–5 сек после сигнала. При сбое — проверка на алкотестере у механика.</li>
+<li><b>МИС «Лекарь»:</b> снимите головной убор, в кадре 1 человек. Дуйте сильно 3–5 сек после сигнала. При сбое — алкотестер у механика.</li>
 <li><b>Осмотр в BTS Driver:</b> 🟢 Зеленый — всё ОК. 🟡 Желтый — мелкие недочеты (доукомплектовать у механика). 🔴 Красный — выезд запрещен, замена авто.</li>
 </ul>
 </div>
-
-<div class="cd" data-cat="morning" data-tags="маркер стикер зеленый синий желтый красный упаковка qr код маркировка">
-<div class="cc">Утро и Склад</div><div class="ct">5 цветных маркеров на коробках и QR-коды</div>
+<div class="cd">
+<div class="ct">5 цветных маркеров на коробках и QR-коды</div>
 <ul>
-<li><b>Без маркера / 🟢 Зеленый / 🔵 Синий:</b> товар проверен и переупакован складом. Курьер обязан принять его <b>без вскрытия</b>.</li>
+<li><b>Без маркера / 🟢 Зеленый / 🔵 Синий:</b> товар проверен и переупакован складом. Принимать <b>без вскрытия</b>.</li>
 <li><b>🟡 Желтый маркер:</b> требует проверки при приемке. Вскрывать только в присутствии кладовщика!</li>
-<li><b>🔴 Красный маркер:</b> повреждена упаковка, но доставка дефекта согласована с покупателем.</li>
-<li><b>QR-коды (УКЗ/КМ):</b> товары, подсвеченные в МПК <b>желтым или бледно-сиреневым</b> цветом, обязательно сканируются при погрузке, при вручении и при возврате шин.</li>
+<li><b>🔴 Красный маркер:</b> повреждена упаковка, но доставка согласована с покупателем.</li>
+<li><b>QR-коды (УКЗ/КМ):</b> товары, подсвеченные в МПК <b>желтым или бледно-сиреневым</b> цветом, сканируются при погрузке, при вручении и при возврате шин.</li>
 </ul>
-<div class="al ad">Запрещено принимать товар со следами экскрементов птиц! После подписания задания ответственность за целостность товара лежит на курьере.</div>
+<div class="al ad">Запрещено принимать товар со следами экскрементов птиц! После подписания задания ответственность за товар лежит на курьере.</div>
 </div>
-
-<div class="cd" data-cat="morning" data-tags="документы выписка накладные ттн бланки курьерская комната">
-<div class="cc">Утро и Склад</div><div class="ct">Какие документы забрать перед погрузкой</div>
+<div class="cd">
+<div class="ct">Документы перед погрузкой</div>
 <ul>
-<li><b>У окон выписки (КБТ, МБТ, Регионы):</b> ТТН, задание на перевозку (1 экз.), кредитные/лизинговые пакеты и реестр, договоры страхования, акты на возврат/замену, документы на прицепы/мото/лодки.</li>
-<li><b>В ячейках курьерской комнаты:</b> пустые бланки товарных чеков, актов ТМЦ (Прил. 6), гарантийных писем WebPay/Assist (Прил. 8), актов расхождения (Прил. 12) и уведомлений об ЭСЧФ (Прил. 11).</li>
+<li><b>У окон выписки (КБТ, МБТ, Регионы):</b> ТТН, задание на перевозку (1 экз.), кредитные/лизинговые пакеты, страховки, акты возврата, доки на прицепы/мото/лодки.</li>
+<li><b>В ячейках курьерской комнаты:</b> пустые бланки товарных чеков, актов ТМЦ (Прил. 6), гарантийных писем WebPay/Assist (Прил. 8), актов расхождения (Прил. 12), уведомлений ЭСЧФ (Прил. 11).</li>
 </ul>
 </div>
+</div>
+</details>
 
-<div class="cd" data-cat="delivery" data-tags="звонок выезд время раньше интервал ввв опоздание">
-<div class="cc">Звонки и ВВВ</div><div class="ct">Звонок перед выездом и доставка раньше срока</div>
+<details class="sec" data-tags="звонок выезд время раньше интервал ввв опоздание недозвон дверь нет дома 15 минут занос сборка 18+">
+<summary class="sec-btn">🚚 2. Звонки, ВВВ, Недозвон и Занос</summary>
+<div class="sec-body">
+<div class="cd">
+<div class="ct">Звонок перед выездом и доставка «В Ваше время» (ВВВ)</div>
 <ul>
 <li><b>Когда звонить:</b> за 15 мин (Минск), за 30 мин (Минский р-н и регионы). Только с <b>рабочего телефона</b>!</li>
-<li><b>Доставка раньше интервала:</b> разрешена только для <b>первых 3-х заказов</b> в МПК и только с согласия клиента.</li>
-<li><b>Заказы «В Ваше время» (ВВВ):</b> интервал 30 мин (Минск) или 60 мин (регионы). Отдавать ВВВ раньше интервала без просьбы клиента <b>запрещено</b>.</li>
+<li><b>Доставка раньше интервала:</b> разрешена только для <b>первых 3-х заказов</b> в МПК и с согласия клиента.</li>
+<li><b>Заказы «В Ваше время» (ВВВ):</b> интервал 30 мин (Минск) или 60 мин (регионы). Отдавать ВВВ раньше без просьбы клиента <b>запрещено</b>.</li>
 </ul>
 <div class="sc">«Добрый день, служба доставки 21vek.by, курьер [Имя], с Вами согласована доставка на сегодня. Выезжаю к Вам, буду через 15/30 минут. Вы готовы принять заказ?»</div>
 <div class="al aw">При опоздании на ВВВ свяжитесь с логистом для отмены платной услуги. Скажите клиенту: «Деньги за доставку "В ваше время" вернутся на карту в срок до 30 календарных дней».</div>
 </div>
-
-<div class="cd" data-cat="delivery" data-tags="недозвон не берет трубку дверь нет дома ждать 15 минут">
-<div class="cc">Звонки и ВВВ</div><div class="ct">Клиент не берет трубку или нет дома</div>
+<div class="cd">
+<div class="ct">Клиент не берет трубку или нет дома</div>
 <ol>
 <li>Сообщите информацию координатору.</li>
 <li><b>Обязательно</b> поезжайте по указанному в МПК адресу.</li>
@@ -112,19 +101,49 @@ th{background:#f6f8fa}
 </ol>
 <div class="al ad">Уезжать с адреса без согласования с координатором СТРОГО ЗАПРЕЩЕНО! Передавать трубку клиенту для разговора с координатором запрещено.</div>
 </div>
-
-<div class="cd" data-cat="delivery" data-tags="занос квартира подъем сборка подключение 18+ мусор утилизация">
-<div class="cc">Звонки и ВВВ</div><div class="ct">Занос в квартиру, сборка и товары 18+</div>
+<div class="cd">
+<div class="ct">Занос в квартиру, сборка и товары 18+</div>
 <ul>
 <li><b>Занос в квартиру:</b> до места, указанного клиентом, если проход свободен и зазор по бокам коробки <b>не менее 5 см</b>. Двигать мебель клиента запрещено.</li>
 <li><b>Сборка и утилизация:</b> курьер <b>не собирает/не подключает</b> технику и <b>не забирает</b> старую технику/мебель на мусорку. Предложите забрать остатки упаковки.</li>
 <li><b>Товары 18+:</b> передаются в непрозрачном пакете (кроме презервативов и лубрикантов). Демонстрация только лично, без третьих лиц.</li>
 </ul>
 </div>
+</div>
+</details>
 
-<div class="cd" data-cat="payment" data-tags="халва черепаха карта покупок рассрочка терминал">
-<div class="cc">Оплата и PAX</div><div class="ct">Оплата картами рассрочки (Халва и др.)</div>
+<details class="sec" data-tags="халва черепаха карта покупок рассрочка терминал сломался касса pax чек ерип аннулировать webpay assist сертификат инкассация">
+<summary class="sec-btn">💳 3. Оплата, PAX, Рассрочки и Сертификаты</summary>
+<div class="sec-body">
+<div class="cd">
+<div class="ct">Карты рассрочки (Халва и др.)</div>
 <p>При прикладывании карты <b>Халва / Халва+</b> выберите на терминале:</p>
 <ul>
 <li><b>1. Халва+</b> — НЕ ВЫБИРАТЬ (оплата бонусами недоступна).</li>
 <li><b>2. Рассрочка Халва 4 мес.</b> — выбирать для рассрочки.</li>
+<li><b>3. Обычная дебетовая карта</b> — если клиент платит своими деньгами.</li>
+</ul>
+<table><tr><th>Карта</th><th>Срок у курьера</th></tr><tr><td>Халва / Карта покупок / СМАРТ</td><td>4 месяца</td></tr><tr><td>КартаFUN (Сбер)</td><td>7 месяцев</td></tr><tr><td>Черепаха (ВТБ)</td><td>10 месяцев</td></tr></table>
+</div>
+<div class="cd">
+<div class="ct">Сбой терминала, поломка кассы PAX или ошибка чека</div>
+<ul>
+<li><b>Не работает терминал (оплата картой):</b> предложите ЕРИП (<i>Интернет-магазины → 0-9 → 2 → 21vek.by → номер заказа с точкой</i>). Для карты рассрочки — запросите у логиста ссылку на оплату.</li>
+<li><b>Сломалась касса PAX:</b> звоните в фин.контроль (после 20:00 — в техподдержку iKassa). Если заменить кассу нельзя — выпишите <b>товарный чек</b>, а на складе пробейте чек по новой кассе.</li>
+<li><b>Ошибочный чек:</b> можно аннулировать <b>только последний</b> пробитый чек!</li>
+</ul>
+<div class="al ad">Запрещено брать деньги без кассы, пробивать чек заранее или просить клиента спуститься «к машине» за чеком!</div>
+</div>
+<div class="cd">
+<div class="ct">Онлайн-оплата, Сертификаты и Сдача выручки</div>
+<ul>
+<li><b>Код подтверждения (ЕРИП/WebPay/Assist):</b> введите код от клиента в МПК до выдачи товара. Если кода нет — сверьте заказ по телефону с заказчиком и заполните <b>Акт приема-передачи ТМЦ (Прил. 6)</b>.</li>
+<li><b>Несовершеннолетний получатель:</b> при верном коде — отдаем. Если кода нет и товар дороже <b>50 руб.</b> — не отдавать!</li>
+<li><b>Подарочный сертификат:</b> впишите дату продажи и срок (+1 год). При оплате сертификатом пробейте по кассе способ оплаты <i>«Сертификат»</i> и заберите оригинал.</li>
+<li><b>Сдача выручки:</b> на каждый Z-отчет должен быть свой чек инкассации из АДМ. Суммы должны строго сходиться с контрольной лентой.</li>
+</ul>
+</div>
+</div>
+</details>
+
+<details class="sec" data-tags="гарантийный талон гт 1000 apple dyson телевизор газ отказ стрейч">
